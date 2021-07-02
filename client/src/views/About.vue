@@ -5,7 +5,8 @@
        <h1>Image Caption Generator</h1>
        <div class="form-group">
           <label>Profile Picture</label>
-          <input type="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >
+          <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >-->
+          <input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>
         </div>
         <button @click.prevent="submit()" class="btn btn-dark btn-lg btn-block"> Upload </button>
       </form>
