@@ -4,10 +4,11 @@
         <form>
             <h1>Image Caption Generator</h1>
             <div class="form-group">
-                <label>Image</label>
+                <!-- <label>Image</label> -->
+                <img src="#" id="userUploadedImg" alt="uploaded" >
                 <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >-->
                 <!--<input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
-                <p>My new caption</p>
+                <p id="captionText">My new caption</p>
             </div>
         </form>
     </div>
@@ -74,3 +75,14 @@ label {
     font-weight: 500;
 }
 </style>
+<script>
+export default {
+    name: 'Caption',
+    mounted() {
+        const data = this.$route.query;
+        document.getElementById("userUploadedImg").src = data["image"];
+        document.getElementById("captionText").innerHTML = data["caption"];
+
+    }
+}
+</script>

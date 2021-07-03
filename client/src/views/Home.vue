@@ -54,12 +54,13 @@ export default {
         console.log(response.data);
         //alert('Upload Successful');
         queryParameter =  response.data;
+        this.$router.push({name:'Caption', query: queryParameter});
       })
       .catch(function (error) {
         console.log("within catch");
         console.log(error);
       })
-      this.$router.push({name:'Caption', query: queryParameter});
+      
     },
   }
 }
