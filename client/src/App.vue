@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/caption">Predicted Caption</router-link>
+      <router-link to="/">Upload Image</router-link> |
+      <router-link to="/caption">Predict Caption</router-link>
     </div>
     <router-view/>
   </div>

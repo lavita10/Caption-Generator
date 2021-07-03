@@ -3,41 +3,66 @@
     <div class="container inner-block vertical-center">
       <form>
        <h1>Image Caption Generator</h1>
-       <div class="form-group">
-          <label>Choose an Image</label>
-          <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >-->
-          <input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>
+       <div class="form-group" style="text-align:center">
+          <label>Choose an Image</label><br/>
+          <div style="text-align:center">
+            <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >-->
+            <input class="file" id="userUploadedImage" name="file" type="file" accept="image/png,image/gif,image/jpeg"/>
+          </div>
         </div>
-        <button @click.prevent="update()" class="btn btn-dark btn-lg btn-block"> Upload </button>
+        <br/>
+        <button @click.prevent="submit()" class="btn btn-dark btn-lg btn-block"> Predict Caption </button>
       </form>
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios';
-  export default {
+export default {
   name: 'Home',
   methods: {
-      update(e){
-        let file = e.target.files[0];
-        //console.log(file);
-        let param = new FormData(); //Create form object
-        param.append('file',file);//Add data to the form object through append
-        console.log(param.get('file')); //FormData private class object, can not be accessed, you can judge whether the value is passed in through get
-        //console.log("showed file");
-        axios.post('http://127.0.0.1:5000/upload',param,{headers:{'Content-Type':'application/x-www-form-urlencoded' }}, ) //The request header must be a form
-          .then(response=>{
-            //console.log("within then");
-            console.log(response.data);
-            alert('Upload Successful');
-            this.$router.replace('/caption');
-          })
-          .catch(function (error) {
-            //console.log("within catch");
-            console.log(error);
-          })
-      }
-    }
+    update(e){
+      let file = e.target.files[0];
+      //console.log(file);
+      let param = new FormData(); //Create form object
+      param.append('file',file);//Add data to the form object through append
+      console.log(param.get('file')); //FormData private class object, can not be accessed, you can judge whether the value is passed in through get
+      //console.log("showed file");
+      axios.post('http://127.0.0.1:5000/upload',param,{headers:{'Content-Type':'application/x-www-form-urlencoded' }}, ) //The request header must be a form
+      .then(response=>{
+        console.log("within then");
+        console.log(response.data);
+        alert('Upload Successful');
+      })
+      .catch(function (error) {
+        console.log("within catch");
+        console.log(error);
+      })
+    },
+    submit(){
+      const e = document.getElementById("userUploadedImage");
+      let file = e.files[0];
+      let queryParameter = "";
+      //console.log(file);
+      let param = new FormData(); //Create form object
+      param.append('file',file);//Add data to the form object through append
+      console.log(param.get('file')); //FormData private class object, can not be accessed, you can judge whether the value is passed in through get
+      //console.log("showed file");
+      axios.post('http://127.0.0.1:5000/upload',param,{headers:{'Content-Type':'application/x-www-form-urlencoded' }}, ) //The request header must be a form
+      .then(response=>{
+        //console.log("within then");
+        console.log(response.data);
+        //alert('Upload Successful');
+        queryParameter =  response.data;
+        this.$router.push({name:'Caption', query: queryParameter});
+      })
+      .catch(function (error) {
+        console.log("within catch");
+        console.log(error);
+      })
+      
+    },
+  }
 }
 </script>
 <!--<script>
