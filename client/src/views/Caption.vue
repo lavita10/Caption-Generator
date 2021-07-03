@@ -1,18 +1,17 @@
 <template>
-  <div class="vue-template">
+<div class="vue-template">
     <div class="container inner-block vertical-center">
-      <form>
-       <h1>Image Caption Generator</h1>
-       <div class="form-group">
-          <label>Image</label>
-          <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >-->
-          <!--<input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
-          <p>My new caption</p>
-        </div>
-        <!--<button @click.prevent="submit()" class="btn btn-dark btn-lg btn-block"> Upload </button>-->
-      </form>
+        <form>
+            <h1>Image Caption Generator</h1>
+            <div class="form-group">
+                <label>Image</label>
+                <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >-->
+                <!--<input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
+                <p>My new caption</p>
+            </div>
+        </form>
     </div>
-  </div>
+</div>
 </template>
 
 <style scoped>
