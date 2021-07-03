@@ -27,6 +27,7 @@ def ping_pong():
 @app.route('/upload',methods=["POST"]) # The method should be consistent with the front end
 def upload():
     file_obj = request.files['file']  # Get files in Flask
+    print(file_obj)
     if file_obj is None:
         # Indicates that no file was sent
         return "File not uploaded"

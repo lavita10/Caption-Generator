@@ -20,18 +20,20 @@ import axios from 'axios';
   methods: {
       update(e){
         let file = e.target.files[0];
-        console.log(file);
+        //console.log(file);
         let param = new FormData(); //Create form object
         param.append('file',file);//Add data to the form object through append
         console.log(param.get('file')); //FormData private class object, can not be accessed, you can judge whether the value is passed in through get
-        console.log("showed file");
+        //console.log("showed file");
         axios.post('http://127.0.0.1:5000/upload',param,{headers:{'Content-Type':'application/x-www-form-urlencoded' }}, ) //The request header must be a form
           .then(response=>{
-            console.log("within then");
+            //console.log("within then");
             console.log(response.data);
+            alert('Upload Successful');
+            this.$router.replace('/caption');
           })
           .catch(function (error) {
-            console.log("within catch");
+            //console.log("within catch");
             console.log(error);
           })
       }
