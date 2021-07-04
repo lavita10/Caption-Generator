@@ -7,11 +7,11 @@
           <label>Choose an Image</label><br/>
           <div style="text-align:center">
             <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >-->
-            <input class="file" id="userUploadedImage" name="file" type="file" accept=".jpg"/>
+            <input v-on:change="checkifEmpty($event)" class="file" id="userUploadedImage" name="file" type="file" accept=".jpg"/>
           </div>
         </div>
         <br/>
-        <button :disabled='isDisabled' @click.prevent="submit()" class="btn btn-dark btn-lg btn-block" > Predict Caption </button>
+        <button disabled=True id="predictCaptionButton" @click.prevent="submit()" class="btn btn-dark btn-lg btn-block" > Predict Caption </button>
         <!--<input type = "submit"  :disabled="isDisable(userUploadedImage)" @click.prevent="submit()" class="btn btn-dark btn-lg btn-block"/>-->
       </form>
     </div>
@@ -21,38 +21,20 @@
 import axios from 'axios';
 export default {
   name: 'Home',
-  computed: {
-    isDisabled() {
-      return true;
-      }
-   },
   methods: {
-    // isDisable(file) {
-    //   return file.length > 0;
-    // },
-    // update(e){
-    //   let file = e.target.files[0];
-    //   //console.log(file);
-    //   let param = new FormData(); //Create form object
-    //   param.append('file',file);//Add data to the form object through append
-    //   console.log(param.get('file')); //FormData private class object, can not be accessed, you can judge whether the value is passed in through get
-    //   //console.log("showed file");
-    //   axios.post('http://127.0.0.1:5000/upload',param,{headers:{'Content-Type':'application/x-www-form-urlencoded' }}, ) //The request header must be a form
-    //   .then(response=>{
-    //     console.log("within then");
-    //     console.log(response.data);
-    //     alert('Upload Successful');
-    //   })
-    //   .catch(function (error) {
-    //     console.log("within catch");
-    //     console.log(error);
-    //   })
-    //},
+    checkifEmpty(e){
+      if(e.srcElement.files.length > 0){
+
+        document.getElementById("predictCaptionButton").disabled = false;
+      }else{
+        document.getElementById("predictCaptionButton").disabled = true;
+      }
+        
+    },
     submit(){
       const e = document.getElementById("userUploadedImage");
       let file = e.files[0];
       let queryParameter = "";
-      //console.log(file);
       let param = new FormData(); //Create form object
       param.append('file',file);//Add data to the form object through append
       console.log(param.get('file')); //FormData private class object, can not be accessed, you can judge whether the value is passed in through get
@@ -74,33 +56,6 @@ export default {
   }
 }
 </script>
-<!--<script>
-//import axios from 'axios';
-export default {
-  //components : {Navigation},
-  name: 'HomePage',                                          
-  data() {
-    return {
-      selectedFile: null
-    };
-  },
-  methods: {
-    onFileChanged (event) {
-      this.selectedFile = event.target.files[0]
-    },
-    submit(){
-      this.handleSubmit();
-    },
-    handleSubmit() {
-      const data = {
-      uploadPic: this.selectedFile,
-      };
-      console.log(data);
-      //this.createProfile(data)    
-    },
-  },
-};
-</script>-->
 
 <style scoped>
   .container {
