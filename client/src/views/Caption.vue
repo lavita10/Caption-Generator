@@ -1,18 +1,23 @@
 <template>
-<div class="vue-template">
-    <div class="container inner-block vertical-center">
-        <form>
-            <h1>Image Caption Generator</h1>
-            <div class="form-group">
-                <!-- <label>Image</label> -->
-                <img src="#" id="userUploadedImg" alt="uploaded" >
-                <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >-->
-                <!--<input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
-                <p id="captionText">My new caption</p>
-            </div>
-        </form>
+<div id="app">
+    <div id="nav">
+      <router-link to="/">Try another Image!</router-link>
     </div>
-</div>
+    <router-view/> 
+    <div class="vue-template">
+        <div class="container inner-block vertical-center">
+            <form>
+                <h1>Image Caption Generator</h1>
+                <div class="form-group">
+                    <!-- <label>Image</label> -->
+                    <img src="#" id="userUploadedImg" alt="uploaded" />
+                    <br/><br/>
+                    <p id="captionText">My new caption</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 
 </template>
 
 <style scoped>
@@ -27,6 +32,11 @@ body {
     min-height: 100vh;
     font-weight: 400;
 }
+img {
+    height: 75%;
+    width: 75%;
+}
+
 
 body,
 html,
