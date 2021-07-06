@@ -50,6 +50,7 @@ def upload():
     response_obj['image'] = DOMAIN_NAME + file_name
     response_obj['caption'] = helperFunction.getCaption(file_obj)
     response_obj['message'] = "Caption successfully generated."
+    response_obj['AudioURL'] = DOMAIN_NAME + "Audio/testaudio.mp3"
     return response_obj
     #save document
    
