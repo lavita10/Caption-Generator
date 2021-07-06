@@ -13,12 +13,59 @@
                     <img src="#" id="userUploadedImg" alt="uploaded" />
                     <br/><br/>
                     <p id="captionText">My new caption</p>
+                    <div class="flex items-center justify-center">
+                        <button @click.prevent="readCaption()" class="btn btn-dark btn-lg btn-block"> Read Caption </button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div> 
 </template>
+
+<script>
+//var myTrack = new Audio(('@/assets/testaudio.mp3'));
+var myTrack = new Audio(require('../assets/testaudio.mp3'));
+//var playPromise = document.querySelector('video').play();
+// In browsers that don’t yet support this functionality,
+// playPromise won’t be defined.
+// if (playPromise !== undefined) {
+//   playPromise.then(function() {
+//     // Automatic playback started!
+//   }).catch(function(error) {
+//     // Automatic playback failed.
+//     // Show a UI element to let the user manually start playback.
+//   });
+// }
+export default {
+    name: 'Caption',
+    data:{
+      audioPlayed: false
+    },
+    methods: {
+      readCaption(){
+        //  myTrack.play()
+          var playPromise = myTrack.play()
+          if (playPromise !== undefined){
+               playPromise.then(function() {
+                   this.audioPlayed = true
+                    console.log("Automatic playback started!");
+               }).catch(function(error) {
+                    console.log("Automatic playback failed.");
+                    console.log(error)
+                    // Show a UI element to let the user manually start playback.
+                });
+            }
+      }
+    },
+    mounted() {
+        const data = this.$route.query;
+        document.getElementById("userUploadedImg").src = data["image"];
+        document.getElementById("captionText").innerHTML = data["caption"];
+
+    }
+}
+</script>
 
 <style scoped>
   .container {
@@ -85,14 +132,3 @@ label {
     font-weight: 500;
 }
 </style>
-<script>
-export default {
-    name: 'Caption',
-    mounted() {
-        const data = this.$route.query;
-        document.getElementById("userUploadedImg").src = data["image"];
-        document.getElementById("captionText").innerHTML = data["caption"];
-
-    }
-}
-</script>

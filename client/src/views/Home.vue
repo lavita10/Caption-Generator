@@ -11,12 +11,12 @@
           </div>
         </div>
         <br/>
-        <button disabled=True id="predictCaptionButton" @click.prevent="submit()" class="btn btn-dark btn-lg btn-block" > Predict Caption </button>
+        <button disabled=True id="predictCaptionButton" @click.prevent="submit()" class="btn btn-dark btn-lg btn-block" > Generate Caption </button>
         <!--<input type = "submit"  :disabled="isDisable(userUploadedImage)" @click.prevent="submit()" class="btn btn-dark btn-lg btn-block"/>-->
       </form>
     </div>
-  </div>
-</template>
+  </div>                      
+</template>   
 <script>
 import axios from 'axios';
 export default {
