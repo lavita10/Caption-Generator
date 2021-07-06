@@ -1,0 +1,138 @@
+<template>
+<div id="app">
+    <div id="nav">
+      <router-link to="/">Try another Image!</router-link>
+    </div>
+    <router-view/> 
+    <div class="vue-template">
+        <div class="container inner-block vertical-center">
+            <form>
+                <h1>Image Caption Generator</h1>
+                <div class="form-group">
+                    <!-- <label>Image</label> -->
+                    <img src="#" id="userUploadedImg" alt="uploaded" />
+                    <br/><br/>
+                    <p id="captionText">My new caption</p>
+                    <div class="flex items-center justify-center">
+                        <button @click.prevent="readCaption()" class="btn btn-dark btn-lg btn-block"> Read Caption </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 
+</template>
+
+<script>
+//var myTrack = new Audio(('@/assets/testaudio.mp3'));
+
+
+//var playPromise = document.querySelector('video').play();
+// In browsers that don’t yet support this functionality,
+// playPromise won’t be defined.
+// if (playPromise !== undefined) {
+//   playPromise.then(function() {
+//     // Automatic playback started!
+//   }).catch(function(error) {
+//     // Automatic playback failed.
+//     // Show a UI element to let the user manually start playback.
+//   });
+// }
+export default {
+    name: 'Caption',
+    data:{
+      audioPlayed: false,
+      AudioUrl : ''
+    },
+    methods: {
+      readCaption(){
+        //  myTrack.play()
+        var myTrack = new Audio(this.AudioUrl);
+        var playPromise = myTrack.play()
+        if (playPromise !== undefined){
+            playPromise.then(function() {
+                this.audioPlayed = true
+                console.log("Automatic playback started!");
+            }).catch(function(error) {
+                console.log("Automatic playback failed.");
+                console.log(error)
+                // Show a UI element to let the user manually start playback.
+            });
+        }
+      }
+    },
+    mounted() {
+        const data = this.$route.query;
+        document.getElementById("userUploadedImg").src = data["image"];
+        document.getElementById("captionText").innerHTML = data["caption"];
+        this.AudioUrl = data["AudioURL"];
+
+    }
+}
+</script>
+
+<style scoped>
+  .container {
+    margin-top: 0.5rem;
+  }
+  * {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-weight: 400;
+}
+img {
+    height: 75%;
+    width: 75%;
+}
+
+
+body,
+html,
+.App,
+.vue-template,
+.vertical-center {
+    width: 100%;
+    height: 100%;
+}
+
+.navbar-light {
+    background-color: #ffffff;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+}
+
+.vertical-center {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;    
+}
+
+.inner-block {
+    width: 450px;
+    margin: auto;
+    background: #ffffff;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+    padding: 40px 55px 45px 55px;
+    border-radius: 15px;
+    transition: all .3s;
+}
+
+.vertical-center .form-control:focus {
+    border-color: #2554FF;
+    box-shadow: none;
+}
+
+.vertical-center h3 {
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+    padding-bottom: 20px;
+}
+
+label {
+    font-weight: 500;
+}
+</style>
