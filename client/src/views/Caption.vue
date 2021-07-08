@@ -12,9 +12,25 @@
                     <!-- <label>Image</label> -->
                     <img src="#" id="userUploadedImg" alt="uploaded" />
                     <br/><br/>
-                    <p id="captionText">My new caption</p>
-                    <div class="flex items-center justify-center">
-                        <button @click.prevent="readCaption()" class="btn btn-dark btn-lg btn-block"> Read Caption </button>
+                    <div class="row">
+                        <label for="cap" id="captionText1" style="text-align:center;">My new caption</label>
+                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                        <input type="submit" @click.prevent="readCaption()" style="float: right !important" value="Read Caption"/>
+                    </div>
+                    <div class="row">
+                        <label for="cap" id="captionText2" style="text-align:center;">My new caption</label>
+                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                        <input type="submit" @click.prevent="readCaption()" style="float: right !important" value="Read Caption"/>
+                    </div>
+                    <div class="row">
+                        <label for="cap" id="captionText3" style="text-align:center;">My new caption</label>
+                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                        <input type="submit" @click.prevent="readCaption()" style="float: right !important" value="Read Caption"/>
+                    </div>
+                    <div class="row">
+                        <label for="cap" id="captionText4" style="text-align:center;">My new caption</label>
+                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                        <input type="submit" @click.prevent="readCaption()" style="float: right !important" value="Read Caption"/>
                     </div>
                 </div>
             </form>
@@ -25,8 +41,6 @@
 
 <script>
 //var myTrack = new Audio(('@/assets/testaudio.mp3'));
-
-
 //var playPromise = document.querySelector('video').play();
 // In browsers that don’t yet support this functionality,
 // playPromise won’t be defined.
@@ -42,13 +56,14 @@ export default {
     name: 'Caption',
     data:{
       audioPlayed: false,
-      AudioUrl : ''
+      AudioUrl1 : ''
     },
     methods: {
       readCaption(){
         //  myTrack.play()
-        var myTrack = new Audio(this.AudioUrl);
+        var myTrack = new Audio(this.AudioUrl1);
         var playPromise = myTrack.play()
+        console.log(playPromise)
         if (playPromise !== undefined){
             playPromise.then(function() {
                 this.audioPlayed = true
@@ -64,9 +79,11 @@ export default {
     mounted() {
         const data = this.$route.query;
         document.getElementById("userUploadedImg").src = data["image"];
-        document.getElementById("captionText").innerHTML = data["caption"];
-        this.AudioUrl = data["AudioURL"];
-
+        document.getElementById("captionText1").innerHTML = data["caption"][0];
+        document.getElementById("captionText2").innerHTML = data["caption"][1];
+        document.getElementById("captionText3").innerHTML = data["caption"][2];
+        document.getElementById("captionText4").innerHTML = data["caption"][3];
+        this.AudioUrl1 = data["AudioURL"];
     }
 }
 </script>
