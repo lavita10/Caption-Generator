@@ -8,6 +8,7 @@ import string
 import os
 import glob
 from time import time
+import datetime
 
 import tensorflow
 
@@ -58,23 +59,24 @@ def encode(imag):
 
 
 def getCaption(file_name):
-    generated_captions=[]
+    generated_captions = []
 
-    feature_vector=encode(data_path+file_name).reshape((1,2048))
+    feature_vector = encode(data_path+file_name).reshape((1,2048))
     print('feature_vector:',feature_vector)
 
     generated_captions.append(greedySearch(feature_vector))
     generated_captions.append(beam_search_predictions(feature_vector,3))
     generated_captions.append(beam_search_predictions(feature_vector,5))
     generated_captions.append(beam_search_predictions(feature_vector,7))
-    audio=generate_audio(generated_captions)
-    print('done processing')
-    print(datetime.now().time())
-    print('generated_captions are:',generated_captions,'\naudio:',audio)
-    return_value=list()
-    return_value.append(generated_captions)
-    return_value.append(audio)
-    return return_value
+    # audio = generate_audio(generated_captions)
+    # print('done processing')
+    # print(datetime.now().time())
+    # print('generated_captions are:',generated_captions,'\naudio:',audio)
+    # return_value = list()
+    # return_value.append(generated_captions)
+    # return_value.append(audio)
+    # return return_value
+    return generated_captions
     
 def greedySearch(feature_vector):
     print('greedy search')
@@ -134,17 +136,23 @@ def beam_search_predictions(feature_vector, beam_index = 3):
     return final_caption
 
 
-def generate_audio(list_of_audio):
-    print('-'*40)
-    print('generate_audio')
-    print(datetime.now().time())
-    print(glob.glob('static/Audio/'))
-    i=1
-    for text in list_of_audio:
-        language = 'en' # English
-        speech = gTTS(text = text, lang = language, slow=False)
-        #speech.save('static/Audio/audio'+str(i)+'.mp3')
-        speech.save('static/Audio/testaudio1.mp3')
-        i+=1
-    audio_name_list=['audio1','audio2','audio3','audio4']
-    return audio_name_list
+def generate_audio(text):
+    # print('-'*40)
+    # print('generate_audio')
+    # print(datetime.now().time())
+    # print(glob.glob('static/Audio/'))
+    # i=1
+    # for text in list_of_audio:
+    #     language = 'en' # English
+    #     speech = gTTS(text = text, lang = language, slow=False)
+    #     #speech.save('static/Audio/audio'+str(i)+'.mp3')
+    #     speech.save('static/Audio/testaudio1.mp3')
+    #     i+=1
+    # audio_name_list=['audio1','audio2','audio3','audio4']
+    # return audio_name_list
+    language = 'en'
+    speech = gTTS(text = text, lang = language, slow=False)
+    fileName = ''.join(datetime.datetime.now().strftime("%d%m%Y%f").split()) + '.mp3'
+    speech.save(f'static/Audio/{fileName}')
+
+    return fileName

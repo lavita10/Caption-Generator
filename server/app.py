@@ -48,11 +48,14 @@ def upload():
     #print(file_path)
     #print(url_for("static", filename = "1.jpg"))
     response_obj['image'] = DOMAIN_NAME + file_name
-    response_value=helperFunction.getCaption(file_name)
-    response_obj['caption'] = response_value[0]
+    generated_captions = helperFunction.getCaption(file_name)
+    response_obj['caption'] = generated_captions
     #response_obj['caption'] = helperFunction.getCaption(file_obj)
     response_obj['message'] = "Caption successfully generated."
-    response_obj['AudioURL'] = DOMAIN_NAME + "Audio/testaudio1.mp3"
+    generated_audio = [helperFunction.generate_audio(audio) for audio in generated_captions]
+    for audioFileName, index in enumerate(generated_audio):
+        response_obj[f'AudioURL{index}'] = DOMAIN_NAME + f"Audio/{audioFileName}"
+    
     return response_obj
     #save document
    
