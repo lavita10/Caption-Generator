@@ -9,28 +9,39 @@
             <form>
                 <h1>Image Caption Generator</h1>
                 <div class="form-group">
-                    <!-- <label>Image</label> -->
                     <img src="#" id="userUploadedImg" alt="uploaded" />
                     <br/><br/>
                     <div class="row">
-                        <label for="cap" id="captionText1" style="text-align:center;">My new caption</label>
-                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                        <input type="submit" @click.prevent="readCaption()" style="float: right !important" value="Read Caption"/>
+                        <div class="col-8">
+                            <label for="caption1" id="captionText1" >My new caption</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="submit" class="btn btn-dark btn-sm" @click.prevent="readCaption(0)"  value="Read Caption"/>
+                        </div>
                     </div>
                     <div class="row">
-                        <label for="cap" id="captionText2" style="text-align:center;">My new caption</label>
-                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                        <input type="submit" @click.prevent="readCaption()" style="float: right !important" value="Read Caption"/>
+                        <div class="col-8">
+                            <label for="caption2" id="captionText2" >My new caption</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="submit" class="btn btn-dark btn-sm" @click.prevent="readCaption(1)" value="Read Caption"/>
+                        </div>
                     </div>
                     <div class="row">
-                        <label for="cap" id="captionText3" style="text-align:center;">My new caption</label>
-                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                        <input type="submit" @click.prevent="readCaption()" style="float: right !important" value="Read Caption"/>
+                        <div class="col-8">
+                            <label for="caption3" id="captionText3">My new caption</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="submit" class="btn btn-dark btn-sm" @click.prevent="readCaption(2)" value="Read Caption"/>
+                        </div>
                     </div>
                     <div class="row">
-                        <label for="cap" id="captionText4" style="text-align:center;">My new caption</label>
-                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                        <input type="submit" @click.prevent="readCaption()" style="float: right !important" value="Read Caption"/>
+                        <div class="col-8">
+                            <label for="caption4" id="captionText4">My new caption</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="submit" class="btn btn-dark btn-sm" aria-pressed="true" @click.prevent="readCaption(3)" value="Read Caption"/>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -40,28 +51,16 @@
 </template>
 
 <script>
-//var myTrack = new Audio(('@/assets/testaudio.mp3'));
-//var playPromise = document.querySelector('video').play();
-// In browsers that don’t yet support this functionality,
-// playPromise won’t be defined.
-// if (playPromise !== undefined) {
-//   playPromise.then(function() {
-//     // Automatic playback started!
-//   }).catch(function(error) {
-//     // Automatic playback failed.
-//     // Show a UI element to let the user manually start playback.
-//   });
-// }
 export default {
     name: 'Caption',
     data:{
       audioPlayed: false,
-      AudioUrl1 : ''
-    },
+      AudioUrls : []                          
+    },      
     methods: {
-      readCaption(){
+      readCaption(index){
         //  myTrack.play()
-        var myTrack = new Audio(this.AudioUrl1);
+        var myTrack = new Audio(this.AudioUrls[index]);
         var playPromise = myTrack.play()
         console.log(playPromise)
         if (playPromise !== undefined){
@@ -83,7 +82,11 @@ export default {
         document.getElementById("captionText2").innerHTML = data["caption"][1];
         document.getElementById("captionText3").innerHTML = data["caption"][2];
         document.getElementById("captionText4").innerHTML = data["caption"][3];
-        this.AudioUrl1 = data["AudioURL"];
+        this.AudioUrls = [data["AudioURL0"], data["AudioURL1"], data["AudioURL2"], data["AudioURL3"]]
+        // this.AudioUrls.push(data["AudioURL0"])
+        // this.AudioUrls.push(data["AudioURL1"])
+        // this.AudioUrls.push(data["AudioURL2"])
+        // this.AudioUrls.push(data["AudioURL3"])
     }
 }
 </script>

@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import string
 import os
 import glob
-from time import time
-import datetime
+#from time import time
+#import datetime
 
 import tensorflow
 
@@ -152,7 +152,7 @@ def generate_audio(text):
     # return audio_name_list
     language = 'en'
     speech = gTTS(text = text, lang = language, slow=False)
-    fileName = ''.join(datetime.datetime.now().strftime("%d%m%Y%f").split()) + '.mp3'
+    fileName = ''.join(datetime.now().strftime("%d%m%Y%f").split()) + '.mp3'
     speech.save(f'static/Audio/{fileName}')
 
     return fileName

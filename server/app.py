@@ -53,9 +53,10 @@ def upload():
     #response_obj['caption'] = helperFunction.getCaption(file_obj)
     response_obj['message'] = "Caption successfully generated."
     generated_audio = [helperFunction.generate_audio(audio) for audio in generated_captions]
-    for audioFileName, index in enumerate(generated_audio):
+    for index, audioFileName in enumerate(generated_audio):
         response_obj[f'AudioURL{index}'] = DOMAIN_NAME + f"Audio/{audioFileName}"
-    
+    print(response_obj)
+    print("***********************")
     return response_obj
     #save document
    
