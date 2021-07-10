@@ -29,7 +29,7 @@ from datetime import datetime
 # inception model
 inception_model = load_model('Inception_model.h5')
 # encoder- decoder model
-new_model=load_model('model.h5')
+new_model=load_model('simple_model.h5')
 
 max_length=80
 

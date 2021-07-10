@@ -6,11 +6,12 @@
        <div class="form-group" style="text-align:center">
           <label>Choose an Image</label><br/>
           <div style="text-align:center">
-            <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >-->
-            <input v-on:change="checkifEmpty($event)" ref="myFile" class="file" id="userUploadedImage" name="file" type="file" accept=".jpg"/>
-            <div v-if="imageError" class="imageError">
+            <!--<input type="file" name="file" @change="onFileChanged" accept=".jpg, .jpeg, .png" >
+            <input v-on:change="checkifEmpty($event)" ref="myFile" class="file" id="userUploadedImage" name="file" type="file" accept=".jpg"/>-->
+            <input v-on:change="checkifEmpty($event)" class="file" id="userUploadedImage" name="file" type="file" accept=".jpg"/>
+            <!--<div v-if="imageError" class="imageError">
               {{imageError}}
-            </div>
+            </div>-->
           </div>
         </div>
         <br/>
@@ -22,49 +23,48 @@
 </template>   
 <script>
 import axios from 'axios';
-const MIN_WIDTH = 200;
-const MIN_HEIGHT = 200;
+// const MIN_WIDTH = 200;
+// const MIN_HEIGHT = 200;
 export default {
   name: 'Home',
-  data: {
-    image:{
-      //size:'',
-      height:'',
-      width:'',
-    },
-    imageError:'',
-  },
+  // data: {
+  //   image:{
+  //     //size:'',
+  //     height:'',
+  //     width:'',
+  //   },
+  //   imageError:'',
+  // },
   methods: {
     checkifEmpty(e){
-      this.imageError = '';
-      let file = this.$refs.myFile.files[0];
-      let reader = new FileReader();
+      // this.imageError = '';
+      // let file = this.$refs.myFile.files[0];
+      // let reader = new FileReader();
       
-      reader.readAsDataURL(file);
-      reader.onload = evt => {
-        let img = new Image();
-        //console.log(img)
-        img.onload = () => {
-          this.image.width = img.width;
-          this.image.height = img.height;
-          //console.log(img.height);
-          console.log(this.image);
-          if(this.image.width < MIN_WIDTH) {
-            this.imageError = `The image width (${this.image.width}) is too less (min is ${MIN_WIDTH}).`;
-            return;
-          }
-          if(this.image.height < MIN_HEIGHT) {
-            this.imageError = `The image height (${this.image.height}) is too less (min is ${MIN_HEIGHT}).`;
-            return;
-          }  
-        }
-        img.src = evt.target.result;
-      }
-      reader.onerror = evt => {
-        console.error(evt);
-      }
+      // reader.readAsDataURL(file);
+      // reader.onload = evt => {
+      //   let img = new Image();
+      //   //console.log(img)
+      //   img.onload = () => {
+      //     this.image.width = img.width;
+      //     this.image.height = img.height;
+      //     //console.log(img.height);
+      //     console.log(this.image);
+      //     if(this.image.width < MIN_WIDTH) {
+      //       this.imageError = `The image width (${this.image.width}) is too less (min is ${MIN_WIDTH}).`;
+      //       return;
+      //     }
+      //     if(this.image.height < MIN_HEIGHT) {
+      //       this.imageError = `The image height (${this.image.height}) is too less (min is ${MIN_HEIGHT}).`;
+      //       return;
+      //     }  
+      //   }
+      //   img.src = evt.target.result;
+      // }
+      // reader.onerror = evt => {
+      //   console.error(evt);
+      // }
       if(e.srcElement.files.length > 0){
-
         document.getElementById("predictCaptionButton").disabled = false;
       }else{
         document.getElementById("predictCaptionButton").disabled = true;
@@ -104,12 +104,10 @@ export default {
   * {
     box-sizing: border-box;
 }
-
 body {
     min-height: 100vh;
     font-weight: 400;
 }
-
 body,
 html,
 .App,
@@ -118,19 +116,16 @@ html,
     width: 100%;
     height: 100%;
 }
-
 .navbar-light {
     background-color: #ffffff;
     box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
 }
-
 .vertical-center {
     display: flex;
     text-align: center;
     justify-content: center;
     flex-direction: column;    
 }
-
 .inner-block {
     width: 450px;
     margin: auto;
@@ -140,19 +135,16 @@ html,
     border-radius: 15px;
     transition: all .3s;
 }
-
 .vertical-center .form-control:focus {
     border-color: #2554FF;
     box-shadow: none;
 }
-
 .vertical-center h3 {
     text-align: center;
     margin: 0;
     line-height: 1;
     padding-bottom: 20px;
 }
-
 label {
     font-weight: 500;
 }
