@@ -28,7 +28,7 @@ import axios from 'axios';
 export default {
   name: 'Home',
   // data: {
-  //   image:{
+  //   image:{  
   //     //size:'',
   //     height:'',
   //     width:'',
