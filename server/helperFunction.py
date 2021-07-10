@@ -33,10 +33,10 @@ new_model=load_model('simple_model.h5')
 
 max_length=80
 
-with open('wordtoix.pickle','rb') as f:
+with open('wordtoix.pkl','rb') as f:
     wordtoix=pickle.load(f)
 
-with open('ixtoword.pickle','rb') as f:
+with open('ixtoword.pkl','rb') as f:
     ixtoword=pickle.load(f)
 
 generated_captions='Encountered some error!'
